@@ -20,16 +20,17 @@ class MidiPro {
 
   /// Loads a soundfont file from the specified path.
   /// Returns the sfId (SoundfontSamplerId).
-  Future<int> loadSoundfont({required String path, required int bank, required int program}) async {
-    final tempDir = await getTemporaryDirectory();
-    final tempFile = File('${tempDir.path}/${path.split('/').last}');
-    if (!tempFile.existsSync()) {
-      final byteData = await rootBundle.load(path);
-      final buffer = byteData.buffer;
-      await tempFile
-          .writeAsBytes(buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
-    }
-    return FlutterMidiProPlatform.instance.loadSoundfont(tempFile.path, bank, program);
+  Future<int> loadSoundfont(
+      {required String path, required int bank, required int program}) async {
+    // final tempDir = await getTemporaryDirectory();
+    // final tempFile = File('${tempDir.path}/${path.split('/').last}');
+    // if (!tempFile.existsSync()) {
+    //   final byteData = await rootBundle.load(path);
+    //   final buffer = byteData.buffer;
+    //   await tempFile
+    //       .writeAsBytes(buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+    // }
+    return FlutterMidiProPlatform.instance.loadSoundfont(path, bank, program);
   }
 
   /// Selects an instrument on the specified soundfont.
@@ -54,7 +55,8 @@ class MidiPro {
     /// have banks, set this to 0.
     int bank = 0,
   }) async {
-    return FlutterMidiProPlatform.instance.selectInstrument(sfId, channel, bank, program);
+    return FlutterMidiProPlatform.instance
+        .selectInstrument(sfId, channel, bank, program);
   }
 
   /// Plays a note on the specified channel.
@@ -77,7 +79,8 @@ class MidiPro {
     /// The soundfont ID. First soundfont loaded is 1.
     required int sfId,
   }) async {
-    return FlutterMidiProPlatform.instance.playNote(channel, key, velocity, sfId);
+    return FlutterMidiProPlatform.instance
+        .playNote(channel, key, velocity, sfId);
   }
 
   /// Stops a note on the specified channel.

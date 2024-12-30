@@ -51,8 +51,21 @@ android {
         minSdkVersion 21
         namespace 'com.melihhakanpektas.flutter_midi_pro'
         
-        ndk {
-            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
+        // ndk {
+        //     abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
+        // }
+    }
+
+    buildTypes {
+        debug {
+            ndk {
+                abiFilters "arm64-v8a", "x86_64" // 调试时支持模拟器和真实设备
+            }
+        }
+        release {
+            ndk {
+                abiFilters "arm64-v8a" // 发布时仅包含 arm64-v8a
+            }
         }
     }
 
