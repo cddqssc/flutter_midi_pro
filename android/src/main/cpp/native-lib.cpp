@@ -16,7 +16,7 @@ Java_com_melihhakanpektas_flutter_1midi_1pro_FlutterMidiProPlugin_loadSoundfont(
     synths[nextSfId] = new_fluid_synth(settings);
     drivers[nextSfId] = new_fluid_audio_driver(settings, synths[nextSfId]);
     int sfId = fluid_synth_sfload(synths[nextSfId], nativePath, 0);
-    for (int i = 0; i < 16; i++) {
+    for (int i = 0; i < 1; i++) {
         fluid_synth_program_select(synths[nextSfId], i, sfId, bank, program);
     }
     env->ReleaseStringUTFChars(path, nativePath);
